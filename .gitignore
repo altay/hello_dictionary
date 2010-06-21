@@ -1,0 +1,10 @@
+.DS_Store
+*~
+*.swp
+*.swo
+*.tmproj
+log/*.log
+test/reports/*
+tmp/cache/*
+tmp/sessions/*
+tmp/sockets/*
