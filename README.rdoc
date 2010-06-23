@@ -22,7 +22,7 @@ wordnik-ruby gem on github: http://github.com/wordnik/wordnik-ruby
 3. Edit two lines in hello_dictionary/config/environment.rb:
     3a. Add the wordnik-ruby gem (inside of the Rails::Initializer.run block):
     config.gem "wordnik-ruby"
-    3b. Add your Wordnik API key at the end of the file. Don't have a key? Go here: http://api.wordnik.com/signup
+    3b. Add your Wordnik API key at the end of the file (outside of the Rails::Initializer.run block). Don't have a key? Go here: http://api.wordnik.com/signup
     ENV['WORDNIK_API_KEY'] = "YOUR_API_KEY_GOES_HERE"
 
 3. Add the "initialize_wordnik" function to hello_dictionary/app/controllers/application_controller.rb:
@@ -41,7 +41,7 @@ wordnik-ruby gem on github: http://github.com/wordnik/wordnik-ruby
 4. Create a controller and add an 'index' action:
     >> script/generate controller wordnik
 
-  Edit the new controller (hello_dictionary/app/controllers/wordnik_controller.rb), like so:
+5. Edit the new controller (hello_dictionary/app/controllers/wordnik_controller.rb), like so:
     class WordnikController < ApplicationController
 
       def index
@@ -65,36 +65,37 @@ wordnik-ruby gem on github: http://github.com/wordnik/wordnik-ruby
       end
     end
 
-5. Create your app's layout (hello_dictionary/app/views/layouts/application.html.erb):
+6. Create your app's layout (hello_dictionary/app/views/layouts/application.html.erb):
     <html>
       <head>
         <title>Hello, Dictionary!</title>
       </head>
       <body>
-    <div>
-      <h1>Hello, Dictionary!</h3>
-      <h3>The Wordnik Word of the Day for <%= Time.now.strftime("%A, %B %d, %Y") %> is... <strong><%= link_to(@wotd['wordstring'], "/wordnik?word_search=#{@wotd['wordstring']}") %></strong>!
-      </h3>
-      <p>
-        <% form_tag('/wordnik', :method=>'get') do -%>
-          Look up a word: 
-          <%= text_field_tag('word_search') %>
-          <%= submit_tag('Search') %>
-          <%= submit_tag("I'm Feeling Wordie") %>
-        <% end %>
-      </p>
-    </div>
-    <%= yield %>
-    <hr />
-    <div>
-      <p>Hello Dictionary was built with the <%= link_to("Wordnik API", "http://wordnik.com/developers") %>.</p>
-      <p><strong>Documentation</strong>: <%= link_to("http://docs.wordnik.com/api/methods", "http://docs.wordnik.com/api/methods") %></p>
-      <p><strong>API Key Signup</strong>: <%= link_to("http://api.wordnik.com/signup/", "http://api.wordnik.com/signup/") %></p>
-      <p><strong>Support</strong>: <%= link_to("http://groups.google.com/group/wordnik-api", "http://groups.google.com/group/wordnik-api") %></p>
+        <div>
+          <h1>Hello, Dictionary!</h3>
+          <h3>The Wordnik Word of the Day for <%= Time.now.strftime("%A, %B %d, %Y") %> is... <strong><%= link_to(@wotd['wordstring'], "/wordnik?word_search=#{@wotd['wordstring']}") %></strong>!
+          </h3>
+          <p>
+            <% form_tag('/wordnik', :method=>'get') do -%>
+              Look up a word: 
+              <%= text_field_tag('word_search') %>
+              <%= submit_tag('Search') %>
+              <%= submit_tag("I'm Feeling Wordie") %>
+            <% end %>
+          </p>
+        </div>
+        <%= yield %>
+        <hr />
+        <div>
+          <p>Hello Dictionary was built with the <%= link_to("Wordnik API", "http://wordnik.com/developers") %>.</p>
+          <p><strong>Documentation</strong>: <%= link_to("http://docs.wordnik.com/api/methods", "http://docs.wordnik.com/api/methods") %></p>
+          <p><strong>API Key Signup</strong>: <%= link_to("http://api.wordnik.com/signup/", "http://api.wordnik.com/signup/") %></p>
+          <p><strong>Support</strong>: <%= link_to("http://groups.google.com/group/wordnik-api", "http://groups.google.com/group/wordnik-api") %></p>
+        </div>
       </body>
     </html>
 
-6. Create the template for the wordnik/index action (hello_dictionary/app/views/wordnik/index.html.erb):
+7. Create the template for the wordnik/index action (hello_dictionary/app/views/wordnik/index.html.erb):
     <% unless @word.nil? %>
       <hr />
       <div>
@@ -177,10 +178,10 @@ wordnik-ruby gem on github: http://github.com/wordnik/wordnik-ruby
 7. Start your app's server:
     >> script/server
 
-8. Navigate to http://localhost:3000/wordnik
+9. Navigate to http://localhost:3000/wordnik
     >> open http://localhost:3000/wordnik
 
-9. Party!
+10. Party!
 
 = Resources
 
