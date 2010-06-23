@@ -5,7 +5,7 @@
   <body>
 <div>
   <h1>Hello, Dictionary!</h3>
-  <h3>The Wordnik Word of the Day for <%= Time.now.strftime("%A, %B %d, %Y") %> is... <strong><%= link_to(@wotd['wordstring'], lookup_url(:word_search=>@wotd['wordstring'])) %></strong>!
+  <h3>The Wordnik Word of the Day for <%= Time.now.strftime("%A, %B %d, %Y") %> is... <strong><%= link_to(@wotd['wordstring'], "/wordnik?word_search=#{@wotd['wordstring']}") %></strong>!
   </h3>
   <p>
     <% form_tag('/wordnik', :method=>'get') do -%>

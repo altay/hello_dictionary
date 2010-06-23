@@ -42,3 +42,4 @@ Rails::Initializer.run do |config|
 end
 
 ENV['WORDNIK_API_KEY'] = "YOUR_API_KEY_GOES_HERE"
+ENV['WORDNIK_API_KEY'] = "85b993ddaabe04346e0090d379b02d18ad04bda75d4e0ecca"

@@ -6,7 +6,7 @@ class WordnikController < ApplicationController
     # don't forget to specify your WORDNIK_API_KEY at the bottom of config/environment.rb!
     initialize_wordnik
 
-    if params[:commit] # user has submitted the form
+    if (params[:word_search] || params[:commit]) # user has submitted the form or clicked a link
       if params[:commit]=="I'm Feeling Wordie"
         @word = @wordnik.random_word
       else

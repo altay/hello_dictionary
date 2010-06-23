@@ -49,7 +49,7 @@
             <ul>
               <!-- only display the first 5 related words in each category -->
               <% related_words[0..4].each do |related_word| %>
-                <li><%= link_to(related_word.wordstring, lookup_url(:word_search=>related_word.wordstring)) -%></li>
+                <li><%= link_to(related_word.wordstring, "/wordnik?word_search=#{URI.escape(related_word.wordstring)}") -%></li>
               <% end %>
             </ul>
           <% end %>
@@ -68,7 +68,7 @@
         <% @phrases.each do |phrase| %>
           <% unless phrase['gram1'].blank? -%>
             <% complete_phrase = "#{phrase['gram1']} #{phrase['gram2']}" %>
-            <li><%= link_to(complete_phrase, lookup_url(:word_search=>complete_phrase)) %></li>
+            <li><%= link_to(complete_phrase, "/wordnik?word_search=#{URI.escape(complete_phrase)}") %></li>
           <% end %>
         <% end %>
       </ul>

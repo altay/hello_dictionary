@@ -4,13 +4,10 @@ This is the example Rails app for the Wordnik API and the wordnik-ruby gem.
 
 Follow the instructions, and you'll have a working dictionary up and running in 15 minutes!
 
-Wornik API Documentation: http://docs.wordnik.com/api/methods
-
-Wordnik API Key Signup: http://api.wordnik.com/signup/
-
-Wordnik API Support: http://groups.google.com/group/wordnik-api
-
-The wordnik-ruby gem -- the official Ruby gem for the Wordnik API -- is on github: http://github.com/wordnik/wordnik-ruby
+> Wornik API Documentation: http://docs.wordnik.com/api/methods
+> Wordnik API Key Signup: http://api.wordnik.com/signup
+> Wordnik API Support: http://groups.google.com/group/wordnik-api
+> wordnik-ruby gem on github: http://github.com/wordnik/wordnik-ruby
 
 = Tutorial
 
@@ -23,7 +20,7 @@ The wordnik-ruby gem -- the official Ruby gem for the Wordnik API -- is on githu
 3. Edit two lines in hello_dictionary/config/environment.rb:
     3a. Add the wordnik-ruby gem (inside of the Rails::Initializer.run block):
     config.gem "wordnik-ruby"
-    3b. Add your Wordnik API key at the end of the file
+    3b. Add your Wordnik API key at the end of the file. Don't have a key? Go here: http://api.wordnik.com/signup
     ENV['WORDNIK_API_KEY'] = "YOUR_API_KEY_GOES_HERE"
 
 3. Add the "initialize_wordnik" function to hello_dictionary/app/controllers/application_controller.rb:
@@ -51,7 +48,7 @@ The wordnik-ruby gem -- the official Ruby gem for the Wordnik API -- is on githu
         # don't forget to specify your WORDNIK_API_KEY at the bottom of config/environment.rb!
         initialize_wordnik
 
-        if params[:commit] # user has submitted the form
+        if (params[:word_search] || params[:commit]) # user has submitted the form or clicked a link
           if params[:commit]=="I'm Feeling Wordie"
             @word = @wordnik.random_word
           else
@@ -74,7 +71,7 @@ The wordnik-ruby gem -- the official Ruby gem for the Wordnik API -- is on githu
       <body>
     <div>
       <h1>Hello, Dictionary!</h3>
-      <h3>The Wordnik Word of the Day for <%= Time.now.strftime("%A, %B %d, %Y") %> is... <strong><%= link_to(@wotd['wordstring'], lookup_url(:word_search=>@wotd['wordstring'])) %></strong>!
+      <h3>The Wordnik Word of the Day for <%= Time.now.strftime("%A, %B %d, %Y") %> is... <strong><%= link_to(@wotd['wordstring'], "/wordnik?word_search=#{@wotd['wordstring']}") %></strong>!
       </h3>
       <p>
         <% form_tag('/wordnik', :method=>'get') do -%>
@@ -147,7 +144,7 @@ The wordnik-ruby gem -- the official Ruby gem for the Wordnik API -- is on githu
                 <ul>
                   <!-- only display the first 5 related words in each category -->
                   <% related_words[0..4].each do |related_word| %>
-                    <li><%= link_to(related_word.wordstring, lookup_url(:word_search=>related_word.wordstring)) -%></li>
+                    <li><%= link_to(related_word.wordstring, "/wordnik?word_search=#{URI.escape(related_word.wordstring)}") -%></li>
                   <% end %>
                 </ul>
               <% end %>
@@ -166,7 +163,7 @@ The wordnik-ruby gem -- the official Ruby gem for the Wordnik API -- is on githu
             <% @phrases.each do |phrase| %>
               <% unless phrase['gram1'].blank? -%>
                 <% complete_phrase = "#{phrase['gram1']} #{phrase['gram2']}" %>
-                <li><%= link_to(complete_phrase, lookup_url(:word_search=>complete_phrase)) %></li>
+                <li><%= link_to(complete_phrase, "/wordnik?word_search=#{URI.escape(complete_phrase)}") %></li>
               <% end %>
             <% end %>
           </ul>
