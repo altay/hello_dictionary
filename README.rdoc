@@ -184,12 +184,13 @@ wordnik-ruby gem on github: http://github.com/wordnik/wordnik-ruby
 10. Party!
 
 = Resources
-
 Wordnik API Documentation: http://docs.wordnik.com/api/methods
-Wordnik API Key Signup: http://api.wordnik.com/signup
-Wordnik API Support: http://groups.google.com/group/wordnik-api
-wordnik-ruby gem on github: http://github.com/wordnik/wordnik-ruby
 
+Wordnik API Key Signup: http://api.wordnik.com/signup
+
+Wordnik API Support: http://groups.google.com/group/wordnik-api
+
+wordnik-ruby gem on github: http://github.com/wordnik/wordnik-ruby
 == Copyright
 
 Copyright (c) 2010 Altay Guvench / Wordnik.com. See LICENSE for details.
