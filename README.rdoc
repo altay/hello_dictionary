@@ -20,10 +20,10 @@ The wordnik-ruby gem -- the official Ruby gem for the Wordnik API -- is on githu
 2. Install the wordnik-ruby gem (you may need to do this as sudo, depending on your setup):
     >> gem install wordnik-ruby
 
-3. Edit two lines to hello_dictionary/config/environment.rb:
-  Add the wordnik-ruby gem (inside of the Rails::Initializer.run block):
+3. Edit two lines in hello_dictionary/config/environment.rb:
+Add the wordnik-ruby gem (inside of the Rails::Initializer.run block):
     config.gem "wordnik-ruby"
-  Add your Wordnik API key at the end of the file
+Add your Wordnik API key at the end of the file
     ENV['WORDNIK_API_KEY'] = "YOUR_API_KEY_GOES_HERE"
 
 3. Add the "initialize_wordnik" function to hello_dictionary/app/controllers/application_controller.rb:
