@@ -10,7 +10,7 @@ class WordnikController < ApplicationController
       if params[:commit]=="I'm Feeling Wordie"
         @word = @wordnik.random_word
       else
-        @word = Word.find(params[:word_search])
+        @word = Wordnik::Word.find(params[:word_search])
       end
       @wordstring = @word.wordstring
       @definitions = @word.definitions

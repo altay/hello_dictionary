@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   def initialize_wordnik(options={})
     options.merge!({:api_key=>ENV['WORDNIK_API_KEY']})
-    @wordnik = Wordnik.new(options)
+    @wordnik = Wordnik::Wordnik.new(options)
     @wotd = @wordnik.word_of_the_day
   end
 end
