@@ -33,7 +33,7 @@ wordnik-ruby gem on github: http://github.com/wordnik/wordnik-ruby
 
       def initialize_wordnik(options={})
         options.merge!({:api_key=>ENV['WORDNIK_API_KEY']})
-        @wordnik = Wordnik.new(options)
+        @wordnik = Wordnik::Wordnik.new(options)
         @wotd = @wordnik.word_of_the_day
       end
     end
@@ -54,7 +54,7 @@ wordnik-ruby gem on github: http://github.com/wordnik/wordnik-ruby
           if params[:commit]=="I'm Feeling Wordie"
             @word = @wordnik.random_word
           else
-            @word = Word.find(params[:word_search])
+            @word = Wordnik::Word.find(params[:word_search])
           end
           @wordstring = @word.wordstring
           @definitions = @word.definitions
